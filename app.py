@@ -1,0 +1,212 @@
+from flask import Flask, render_template, request, redirect, session, url_for
+import sqlite3
+from database import init_db
+
+app = Flask(__name__)
+app.secret_key = "SECRET123"   # Change this in production
+
+@app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+# Helper: get database connection
+def get_db():
+    return sqlite3.connect("booking.db", check_same_thread=False)
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        db = get_db()
+        c = db.cursor()
+        # Insert new user
+        try:
+            c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
+            db.commit()
+        except:
+            return "User already exists"
+        return redirect("/login")
+    return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        db = get_db()
+        c = db.cursor()
+        c.execute("SELECT user_id FROM users WHERE username=? AND password=?", (username, password))
+        user = c.fetchone()
+        if user:
+            session["user_id"] = user[0]
+            session["username"] = username
+            return redirect("/")
+        else:
+            return "Invalid login"
+    return render_template("login.html")
+
+#def init_db():
+#    conn = sqlite3.connect("booking.db")
+#    c = conn.cursor()
+#    # Users table
+#    c.execute("""
+#    CREATE TABLE IF NOT EXISTS users(
+#        id INTEGER PRIMARY KEY AUTOINCREMENT,
+#        username TEXT UNIQUE NOT NULL,
+#        password TEXT NOT NULL
+#    )
+#    """)
+#
+#    # Ticket types table
+#    c.execute("""
+#    CREATE TABLE IF NOT EXISTS ticket_types(
+#        ticket_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#        type TEXT NOT NULL,
+#        cost INTEGER NOT NULL
+#    )
+#    """)
+#
+#    # Bookings table
+#    c.execute("""
+#    CREATE TABLE IF NOT EXISTS bookings(
+#        booking_id INTEGER PRIMARY KEY AUTOINCREMENT,
+#        user_id INTEGER NOT NULL,
+#        ticket_id INTEGER NOT NULL,
+#        people INTEGER NOT NULL,
+#        date TEXT NOT NULL,
+#        FOREIGN KEY (user_id) REFERENCES users(id),
+#        FOREIGN KEY (ticket_id) REFERENCES ticket_types(ticket_id)
+#    )
+#    """)
+#    # hotelbooking table
+#    c.execute("""
+#    CREATE TABLE IF NOT EXISTS hotelbooking (
+#        id INTEGER PRIMARY KEY AUTOINCREMENT,
+#        user_id INTEGER,
+#        check_in TEXT,
+#        check_out TEXT,
+#        rooms INTEGER,
+#        adults INTEGER,
+#        children INTEGER
+#    )
+#    """)
+#
+#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Adult', 30)")
+#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Child', 20)")
+#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Student', 20)")
+#
+#    conn.commit()
+#    conn.close()
+
+@app.route("/booking", methods=["GET", "POST"])
+def booking():
+    # must be logged in
+    if "user_id" not in session:
+        return redirect("/login")
+
+    if request.method == "POST":
+        user_id = session.get('user_id', 1)
+        booking_date = request.form["date"]
+        adults = int(request.form['adults'])
+        children = int(request.form['children'])
+        students = int(request.form['students'])
+
+        db = get_db()
+        c = db.cursor()
+
+        try:
+            c.execute('INSERT INTO bookings (user_id, booking_date, adults, children, students) VALUES (?, ?, ?, ?, ?)',
+                      (user_id, booking_date, adults, children, students))
+            db.commit()  # ✅ Commit on connection
+        except sqlite3.Error as e:
+            print("Database error:", e)
+        finally:
+            c.close()
+            db.close()  # ✅ Close connection
+        return redirect(url_for('my_bookings'))
+    
+        #total_people = adults + children + students
+        #totalCost = totalStudentCost + totalChildCost + totalAdultCost
+        #return render_template("confirm.html", 
+        #                       date=selected_date, 
+        #                       people=total_people,
+        #                       
+        #                       adults=adults,
+        #                       adultCost= adultCost,
+        #                       totalAdultCost=totalAdultCost,
+#
+        #                       children=children,
+        #                       childCost=childCost,
+        #                       totalChildCost = totalChildCost,
+#
+        #                       students=students,
+        #                       studentCost=studentCost,
+        #                       totalStudentCost = totalStudentCost,
+#
+        #                       totalCost=totalCost)
+
+    return render_template("booking.html")
+
+
+@app.route("/hotel", methods=["GET", "POST"])
+def hotel():
+    
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    if request.method == "POST":
+        user_id = session["user_id"]
+        check_in = request.form["check_in"]
+        check_out = request.form["check_out"]
+        guests = int(request.form["guests"])
+        room_type = request.form["room_type"]
+
+
+
+        conn = sqlite3.connect("booking.db")
+        conn.row_factory = sqlite3.Row
+        c = conn.cursor()
+        c.execute("""
+            INSERT INTO hotel_bookings (user_id, check_in, check_out, guests, room_type)
+            VALUES (?, ?, ?, ?, ?)
+        """, (user_id, check_in, check_out, guests, room_type))
+        conn.commit()
+        conn.close()
+        return redirect(url_for("my_bookings"))
+
+
+    return render_template("hotel_booking.html")
+
+
+@app.route("/my-bookings")
+def my_bookings():
+    if "user_id" not in session:
+        return redirect(url_for("login"))
+
+    user_id = session["user_id"]
+
+    conn = sqlite3.connect("booking.db")
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+
+    c.execute("SELECT booking_date, adults, children, students, created_at FROM bookings WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
+    zoo_bookings = c.fetchall()
+
+    c.execute("SELECT check_in, check_out, guests, room_type, created_at FROM hotel_bookings WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
+    hotel_bookings = c.fetchall()
+
+    conn.close()
+    return render_template("my_bookings.html", zoo_bookings=zoo_bookings, hotel_bookings=hotel_bookings)
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
+
+if __name__ == "__main__":
+    app.run(debug=True)

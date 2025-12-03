@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Booking Confirmed! 🎉</h1>
+
+<p>Your visit is booked for: <strong>{{ date }}</strong></p>
+<p>Number of people: <strong>{{ people }}</strong></p>
+
+<p>Adults: <strong>{{ adults }} x £{{adultCost}} = £{{totalAdultCost}}</strong></p>
+<p>Children: <strong>{{ children }} x £{{childCost}} = £{{totalChildCost}}</strong></p>
+<p>Students: <strong>{{ students }} x £{{studentCost}} = £{{totalStudentCost}}</strong></p>
+
+
+<p>TOTAL: <strong>£{{ totalCost }}</strong></p>
+
+<a href="/my-bookings">View My Bookings</a>
+{% endblock %}
