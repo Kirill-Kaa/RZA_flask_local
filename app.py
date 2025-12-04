@@ -13,8 +13,11 @@ def home():
 def about():
     return render_template("about.html")
 # Helper: get database connection
+# Helper: get database connection
 def get_db():
-    return sqlite3.connect("booking.db", check_same_thread=False)
+    # Make sure we get the DB name by checking the config for a DATABASE or assigning it a default one
+    db = app.config.get("DATABASE", "booking.db") 
+    return sqlite3.connect(db, check_same_thread=False)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
