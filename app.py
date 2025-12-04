@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
-from database import init_db
 
 app = Flask(__name__)
 app.secret_key = "SECRET123"   # Change this in production
@@ -12,7 +11,6 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html")
-# Helper: get database connection
 # Helper: get database connection
 def get_db():
     # Make sure we get the DB name by checking the config for a DATABASE or assigning it a default one
@@ -124,12 +122,12 @@ def booking():
         try:
             c.execute('INSERT INTO bookings (user_id, booking_date, adults, children, students) VALUES (?, ?, ?, ?, ?)',
                       (user_id, booking_date, adults, children, students))
-            db.commit()  # ✅ Commit on connection
+            db.commit() 
         except sqlite3.Error as e:
             print("Database error:", e)
         finally:
             c.close()
-            db.close()  # ✅ Close connection
+            db.close()  
         return redirect(url_for('my_bookings'))
     
         #total_people = adults + children + students
