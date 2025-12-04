@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mt-4 mb-3 p-5 bg-success text-white text-center rounded">
+    <h1>Welcome to About RZA!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi est adipisci eveniet neque quae corporis voluptatum. Mollitia cum officiis numquam.!</p> 
+</div>
+
+  <!-- Zoo Introduction -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <img src="/static/images/zoo_into.jpg" class="img-fluid rounded shadow" width="85%" alt="Zoo Introduction">
+    </div>
+    <div class="col-md-6">
+      <h2>Who We Are</h2>
+      <p>Founded in 1995, our zoo is dedicated to conservation, education, and unforgettable wildlife experiences. We strive to inspire love and respect for animals through meaningful encounters and learning opportunities.</p>
+      <p>With over 80 species from around the world, we are committed to providing excellent care and creating a safe, enriching environment for both animals and visitors.</p>
+    </div>
+  </div>
+
+  <!-- Animal Collection -->
+  <div class="row mb-5">
+    <div class="col-md-12 text-center mb-4">
+      <h2>Our Animal Family</h2>
+      <p class="text-muted">Get to know some of our most beloved residents.</p>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <img src="/static/images/lions.jpg" class="card-img-top" alt="Lion">
+        <div class="card-body">
+          <h5 class="card-title">Lions</h5>
+          <p class="card-text">Meet our majestic lion pride, ambassadors for endangered big cats worldwide.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <img src="/static/images/pandas.jpg" class="card-img-top" alt="Panda">
+        <div class="card-body">
+          <h5 class="card-title">Pandas</h5>
+          <p class="card-text">Our panda conservation program helps protect these gentle creatures and their habitats.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm h-100">
+        <img src="/static/images/elephants.jpg" class="card-img-top" alt="Elephant">
+        <div class="card-body">
+          <h5 class="card-title">Elephants</h5>
+          <p class="card-text">Our elephants enjoy spacious habitats and daily enrichment activities.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conservation -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6 order-md-2">
+      <img src="/static/images/conservation.jpg" class="img-fluid rounded shadow" alt="Conservation Efforts">
+    </div>
+    <div class="col-md-6 order-md-1">
+      <h2>Conservation Efforts</h2>
+      <p>We actively support global conservation programs and partner with wildlife organizations to protect endangered species. Our breeding initiatives help restore threatened populations while our habitats are designed to mirror natural environments.</p>
+    </div>
+  </div>
+
+  <!-- Education Programs -->
+  <div class="row mb-5">
+    <div class="col-md-12 text-center mb-4">
+      <h2>Education & Learning</h2>
+      <p class="text-muted">Helping visitors of all ages learn about the natural world.</p>
+    </div>
+    <div class="col-md-4">
+      <div class="p-4 border rounded shadow-sm h-100 bg-light">
+        <h5>School Programs</h5>
+        <p>Join our guided educational tours designed for school groups and young learners.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-4 border rounded shadow-sm h-100 bg-light">
+        <h5>Keeper Talks</h5>
+        <p>Learn directly from our expert zookeepers during daily animal talks and demonstrations.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-4 border rounded shadow-sm h-100 bg-light">
+        <h5>Workshops</h5>
+        <p>Interactive workshops offer hands-on experiences for future wildlife enthusiasts.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Future Plans -->
+  <div class="row align-items-center mb-5">
+    <div class="col-md-6">
+      <img src="/static/images/future.jpg" class="img-fluid rounded shadow" alt="Future Plans">
+    </div>
+    <div class="col-md-6">
+      <h2>Future Plans</h2>
+      <p>We are planning new habitats, improved visitor facilities, and expanded conservation partnerships. Stay tuned as we continue to grow and innovate while keeping animal welfare at the heart of everything we do.</p>
+    </div>
+  </div>
+
+  <!-- Call to Action -->
+  <div class="mb-5 row mt-5 text-center">
+    <div class="col-md-12">
+      <h3>Join Us in Protecting Wildlife</h3>
+      <p class="text-muted">Your visit supports our mission. Thank you for helping us make a difference.</p>
+      <a href="/booking" class="btn btn-primary btn-lg">Plan Your Visit</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

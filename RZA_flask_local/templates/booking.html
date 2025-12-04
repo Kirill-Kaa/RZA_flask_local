@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mt-4 mb-5 p-5 bg-success text-white text-center rounded">
+    <h1>Book Your Visit</h1>
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="col-md-8 col-md-push-5">
+        <div class="col-md-6">
+            <h1 class="fw-bold">Book your ticket</h1>
+            <p class="text-muted">
+                Plan your visit easily — select the date, number of guests, and ticket type.  
+                Our booking system is fast, simple, and helps you skip the queue.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4 col-md-pull-7 ">
+        <div class="booking-form ">
+            <form method="POST">
+                <div class="form-group">
+                    <span class="form-label">Choose a date:</span>
+                    <input type="date" name="date" id="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Number of adults <span class="badge bg-success">£30</span></label>
+                    <input type="number" name="adults" min="1" max="10" class="form-control" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label  class="form-label">Amount of children <span class="badge bg-success">£15</span></label>
+                    <input type="number" name="children" min="0" max="10" class="form-control" placeholder="0" >
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Amount of students <span class="badge bg-success">£20</span></label>
+                    <input type="number" name="students" min="0" max="10" class="form-control" placeholder="0" value="0">
+                </div>
+                <label for="ticket-type" class="form-label">Choose ticket type from the list:</label>
+                <select class="form-select" disabled>
+                    <option>Single</option>
+                    <option>Group</option>
+                    <option>Family</option>
+                    <option>Child</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Continue</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

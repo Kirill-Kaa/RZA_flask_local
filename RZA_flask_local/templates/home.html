@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mt-4 p-5 bg-success text-white text-center rounded">
+    <h1>Welcome to Ridget Zoo Adventure!</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi est adipisci eveniet neque quae corporis voluptatum. Mollitia cum officiis numquam.!</p> 
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>About RZA</h2>
+        <h5>Photo of me:</h5>
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-image rounded-circle" width="250" height="250" >
+        <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+        <h3 class="mt-4">Some Links</h3>
+        <p>Lorem ipsum dolor sit ame.</p>
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-info" href="/booking">Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/my-bookings">My Booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/about">About us</a>
+          </li>
+        </ul>
+        <hr class="d-sm-none">
+      </div>
+      <div class="col-sm-8">
+        <h2>Beautiful animals</h2>
+        <h5>Title description, Dec 7, 2020</h5>
+        <!-- Carousel -->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+        
+            <!-- Indicators/dots -->
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+              <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+            </div>
+
+            <!-- The slideshow/carousel -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='images/baner1.jpg') }}" alt="Zebra" class="d-block" width="800" height="400">
+              </div>
+              <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/baner2.jpg') }}" alt="Chicago" class="d-block" width="800" height="400">
+              </div>
+              <div class="carousel-item">
+                <img src="{{ url_for('static', filename='images/baner3.jpg') }}" alt="New York" class="d-block" width="800" height="400">
+              </div>
+            </div>
+
+            <!-- Left and right controls/icons -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        <p>Some text..</p>
+        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+  
+        <h2 class="mt-5">TITLE HEADING</h2>
+        <h5>Title description, Sep 2, 2020</h5>
+        <div class="fakeimg">Fake Image</div>
+        <p>Some text..</p>
+        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
