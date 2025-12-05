@@ -137,25 +137,26 @@ def init_db():
    c.execute("""
    CREATE TABLE IF NOT EXISTS bookings(
        booking_id INTEGER PRIMARY KEY AUTOINCREMENT,
-       user_id INTEGER NOT NULL,
-       ticket_id INTEGER NOT NULL,
-       people INTEGER NOT NULL,
-       date TEXT NOT NULL,
        FOREIGN KEY (user_id) REFERENCES users(id),
-       FOREIGN KEY (ticket_id) REFERENCES ticket_types(ticket_id)
+       booking_date DATE NOT NULL,
+       adults INTEGER DEFAULT 1 NOT NULL,
+       childred INTEGER DEFAULT 0,
+       students INTEGER DEFAULT 0,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
    )
    """)
    # hotelbooking table
    c.execute("""
-   CREATE TABLE IF NOT EXISTS hotelbooking (
-       id INTEGER PRIMARY KEY AUTOINCREMENT,
-       user_id INTEGER,
-       check_in TEXT,
-       check_out TEXT,
-       rooms INTEGER,
-       adults INTEGER,
-       children INTEGER
-   )
+   CREATE TABLE hotel_bookings (
+            hotel_booking_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            check_in DATE NOT NULL,
+            check_out DATE NOT NULL,
+            guests INTEGER DEFAULT 1,
+            room_type TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(user_id)
+        );
    """)
 
    conn.commit()

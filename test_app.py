@@ -33,11 +33,11 @@ class TestPageLoad(unittest.TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)#
 
-    #def test_education(self):
-    #    response = self.client.get("/education")
-    #    self.assertEqual(response.status_code, 200)
-    #    #this tests if the text exists in your page so we know it loaded
-    #    self.assertIn(b"Read about the Zoo Animals", response.data)
+    def test_education(self):
+       response = self.client.get("/education")
+       self.assertEqual(response.status_code, 200)
+       #this tests if the text exists in your page so we know it loaded
+       self.assertIn(b"Engaging real-life learning experiences", response.data)
 
 
     def test_user_saved_in_database(self):
@@ -49,6 +49,9 @@ class TestPageLoad(unittest.TestCase):
         print(result)
         conn.close()
         self.assertIsNotNone(result)
+    
+    def test_booking_database(self):
+        
 
     def tearDown(self):
         pass
