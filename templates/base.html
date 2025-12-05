@@ -23,7 +23,7 @@
             <li>
             </li>
             <li class="nav-item">
-              <a class="nav-link active " href="/">Home</a>
+              <a class="nav-link " href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
@@ -67,21 +67,19 @@
     </div>
     -->
     <script>
-      // Source - https://stackoverflow.com/q
-// Posted by user3733831, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-12-05, License - CC BY-SA 3.0
-
-    $('#menu > ul.navbar-nav li').click(function(e) {
-        $('.navbar li.active').removeClass('active');
-        var $this = $(this);
-        if (!$this.hasClass('active')) {
-            $this.addClass('active');
-        }
-        e.preventDefault();
-    });
-
+      document.addEventListener("DOMContentLoaded", function () {
+          const currentPath = window.location.pathname;
+          const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+      
+          navLinks.forEach(link => {
+              // Check if link href matches current URL path
+              if (link.getAttribute("href") === currentPath) {
+                  link.classList.add("active");
+              }
+          });
+      });
       </script>
-    
+      
 </body>
 
 </html>
