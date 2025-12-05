@@ -1,5 +1,5 @@
 import unittest
-from app import app, init_db  # import your Flask instance
+from app import app, init_db, get_db  # import your Flask instance
 import os
 class TestPageLoad(unittest.TestCase):
 
@@ -31,7 +31,30 @@ class TestPageLoad(unittest.TestCase):
 
     def test_home_page_loads(self):
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)#
 
+    #def test_education(self):
+    #    response = self.client.get("/education")
+    #    self.assertEqual(response.status_code, 200)
+    #    #this tests if the text exists in your page so we know it loaded
+    #    self.assertIn(b"Read about the Zoo Animals", response.data)
+
+
+    def test_user_saved_in_database(self):
+        self.client.post("/register", data={"username": "Bob", "password": "123456"}, follow_redirects=True)
+        conn = get_db()
+        c = conn.cursor()
+        c.execute("SELECT username FROM users WHERE username = 'Bob'")
+        result = c.fetchone()
+        print(result)
+        conn.close()
+        self.assertIsNotNone(result)
+
+    def tearDown(self):
+        pass
+        if os.path.exists("test.db"):
+                os.remove("test.db")
+
+    
 if __name__ == "__main__":
     unittest.main()

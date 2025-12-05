@@ -32,6 +32,7 @@ def register():
         try:
             c.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
             db.commit()
+            db.close()  
         except:
             return "User already exists"
         return redirect("/login")
@@ -46,6 +47,7 @@ def login():
         c = db.cursor()
         c.execute("SELECT user_id FROM users WHERE username=? AND password=?", (username, password))
         user = c.fetchone()
+        db.close()  
         if user:
             session["user_id"] = user[0]
             session["username"] = username
