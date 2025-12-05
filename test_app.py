@@ -50,11 +50,35 @@ class TestPageLoad(unittest.TestCase):
         conn.close()
         self.assertIsNotNone(result)
     
-    def test_booking_database(self):
+    def test_booking_saved_in_database(self):
+        # Register a user first
+        self.client.post("/register", data={"username": "Alice", "password": "abcdef"}, follow_redirects=True)
+        conn = get_db()
+        c = conn.cursor()
+        c.execute("SELECT user_id FROM users WHERE username = 'Alice'")
+        user_id = c.fetchone()[0]
+
+        # Insert a booking for that user
+        c.execute("""
+            INSERT INTO hotel_bookings (user_id, check_in, check_out, room_type)
+            VALUES (?, ?, ?, ?)
+        """, (user_id, "2025-12-10", "2025-12-12", "Deluxe"))
+        conn.commit()
+
+        # Verify booking exists
+        c.execute("SELECT user_id, check_in, check_out, guests, room_type FROM hotel_bookings WHERE user_id=?", (user_id,))
+        booking = c.fetchone()
+        conn.close()
+
+        self.assertIsNotNone(booking, "Booking should be inserted")
+        self.assertEqual(booking[0], user_id)
+        self.assertEqual(booking[1], "2025-12-10")
+        self.assertEqual(booking[2], "2025-12-12")
+        self.assertEqual(booking[3], 1)  # default guests
+        self.assertEqual(booking[4], "Deluxe")
         
 
     def tearDown(self):
-        pass
         if os.path.exists("test.db"):
                 os.remove("test.db")
 
