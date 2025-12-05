@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
     <title>{{ title if title else "Zoo Booking System" }}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
 </head>
 
 <body>
@@ -15,11 +17,19 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
           <ul class="navbar-nav">
+            <li>
+              <a class="navbar-brand" href="/">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="30" height="24" class="logo-image rounded-circle">
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/education">Education</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/booking">Booking</a>

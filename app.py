@@ -11,6 +11,10 @@ def home():
 @app.route("/about")
 def about():
     return render_template("about.html")
+
+@app.route("/education")
+def education():
+    return render_template("education.html")
 # Helper: get database connection
 def get_db():
     # Make sure we get the DB name by checking the config for a DATABASE or assigning it a default one
@@ -50,59 +54,6 @@ def login():
             return "Invalid login"
     return render_template("login.html")
 
-#def init_db():
-#    conn = sqlite3.connect("booking.db")
-#    c = conn.cursor()
-#    # Users table
-#    c.execute("""
-#    CREATE TABLE IF NOT EXISTS users(
-#        id INTEGER PRIMARY KEY AUTOINCREMENT,
-#        username TEXT UNIQUE NOT NULL,
-#        password TEXT NOT NULL
-#    )
-#    """)
-#
-#    # Ticket types table
-#    c.execute("""
-#    CREATE TABLE IF NOT EXISTS ticket_types(
-#        ticket_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#        type TEXT NOT NULL,
-#        cost INTEGER NOT NULL
-#    )
-#    """)
-#
-#    # Bookings table
-#    c.execute("""
-#    CREATE TABLE IF NOT EXISTS bookings(
-#        booking_id INTEGER PRIMARY KEY AUTOINCREMENT,
-#        user_id INTEGER NOT NULL,
-#        ticket_id INTEGER NOT NULL,
-#        people INTEGER NOT NULL,
-#        date TEXT NOT NULL,
-#        FOREIGN KEY (user_id) REFERENCES users(id),
-#        FOREIGN KEY (ticket_id) REFERENCES ticket_types(ticket_id)
-#    )
-#    """)
-#    # hotelbooking table
-#    c.execute("""
-#    CREATE TABLE IF NOT EXISTS hotelbooking (
-#        id INTEGER PRIMARY KEY AUTOINCREMENT,
-#        user_id INTEGER,
-#        check_in TEXT,
-#        check_out TEXT,
-#        rooms INTEGER,
-#        adults INTEGER,
-#        children INTEGER
-#    )
-#    """)
-#
-#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Adult', 30)")
-#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Child', 20)")
-#    c.execute("INSERT INTO ticket_types (type, cost) VALUES ('Student', 20)")
-#
-#    conn.commit()
-#    conn.close()
-
 @app.route("/booking", methods=["GET", "POST"])
 def booking():
     # must be logged in
@@ -129,26 +80,6 @@ def booking():
             c.close()
             db.close()  
         return redirect(url_for('my_bookings'))
-    
-        #total_people = adults + children + students
-        #totalCost = totalStudentCost + totalChildCost + totalAdultCost
-        #return render_template("confirm.html", 
-        #                       date=selected_date, 
-        #                       people=total_people,
-        #                       
-        #                       adults=adults,
-        #                       adultCost= adultCost,
-        #                       totalAdultCost=totalAdultCost,
-#
-        #                       children=children,
-        #                       childCost=childCost,
-        #                       totalChildCost = totalChildCost,
-#
-        #                       students=students,
-        #                       studentCost=studentCost,
-        #                       totalStudentCost = totalStudentCost,
-#
-        #                       totalCost=totalCost)
 
     return render_template("booking.html")
 
@@ -166,8 +97,6 @@ def hotel():
         guests = int(request.form["guests"])
         room_type = request.form["room_type"]
 
-
-
         conn = sqlite3.connect("booking.db")
         conn.row_factory = sqlite3.Row
         c = conn.cursor()
@@ -178,7 +107,6 @@ def hotel():
         conn.commit()
         conn.close()
         return redirect(url_for("my_bookings"))
-
 
     return render_template("hotel_booking.html")
 
