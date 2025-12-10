@@ -68,6 +68,7 @@ def booking():
         adults = int(request.form['adults'])
         children = int(request.form['children'])
         students = int(request.form['students'])
+        ticket_type=request.form["ticket-type"]
 
         db = get_db()
         c = db.cursor()
@@ -142,6 +143,7 @@ def init_db():
        adults INTEGER DEFAULT 1 NOT NULL,
        childred INTEGER DEFAULT 0,
        students INTEGER DEFAULT 0,
+        ticekt_type TEXT NOT NULL,
        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
    )
    """)
