@@ -8,13 +8,14 @@
 <h2>Zoo Ticket Bookings</h2>
 {% if zoo_bookings %}
 <table class="table">
-    <tr><th>Date</th><th>Adults</th><th>Children</th><th>Students</th><th>Booked On</th></tr>
+    <tr><th>Date</th><th>Adults</th><th>Children</th><th>Students</th><th>ticket_type</th><th>Booked On</th></tr>
     {% for booking in zoo_bookings %}
     <tr>
         <td>{{ booking['booking_date'] }}</td>
         <td>{{ booking['adults'] }}</td>
         <td>{{ booking['children'] }}</td>
         <td>{{ booking['students'] }}</td>
+        <td>{{ booking['ticket_type'] }}</td>
         <td>{{ booking['created_at'] }}</td>
     </tr>
     {% endfor %}

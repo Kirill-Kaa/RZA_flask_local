@@ -74,8 +74,8 @@ def booking():
         c = db.cursor()
 
         try:
-            c.execute('INSERT INTO bookings (user_id, booking_date, adults, children, students) VALUES (?, ?, ?, ?, ?)',
-                      (user_id, booking_date, adults, children, students))
+            c.execute('INSERT INTO bookings (user_id, booking_date, adults, children, students, ticket_type) VALUES (?, ?, ?, ?, ?, ?)',
+                      (user_id, booking_date, adults, children, students, ticket_type))
             db.commit() 
         except sqlite3.Error as e:
             print("Database error:", e)
@@ -175,7 +175,7 @@ def my_bookings():
     conn.row_factory = sqlite3.Row
     c = conn.cursor()
 
-    c.execute("SELECT booking_date, adults, children, students, created_at FROM bookings WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
+    c.execute("SELECT booking_date, adults, children, students, ticket_type, created_at FROM bookings WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
     zoo_bookings = c.fetchall()
 
     c.execute("SELECT check_in, check_out, guests, room_type, created_at FROM hotel_bookings WHERE user_id = ? ORDER BY created_at DESC", (user_id,))
