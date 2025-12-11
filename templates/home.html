@@ -67,12 +67,20 @@
         <p>Some text..</p>
         <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
   
-        <h2 class="mt-5">TITLE HEADING</h2>
-        <h5>Title description, Sep 2, 2020</h5>
-        <div class="fakeimg">Fake Image</div>
-        <p>Some text..</p>
-        <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+        <h2 class="mt-5">Your Feedback Matters!</h2>
+        <div class="row">
+          <div class="fakeimg1 col">
+            <img src="{{ url_for('static', filename='images/QRCode for RZA website feedback.png') }}" alt="QRcode Feedback" width="75%">
+          </div>
+          <div class="fakeimg2 col">
+            <img src="{{ url_for('static', filename='images/Shorter qr.png') }}" alt="Shorter qr" width="75%">
+          </div>
+        </div>
+        <p> We’re always working to make your experience better, and your opinion helps us do that. By sharing your thoughts, you help us improve our website and create content that truly meets your needs.</p>
+        <p>Scan the QR code and let us know what you think — every comment counts! They are same, just choose which you like more.</p>
       </div>
     </div>
   </div>
+
+  
 {% endblock %}
