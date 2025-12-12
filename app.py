@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 import sqlite3
+import os
 
 app = Flask(__name__)
 app.secret_key = "SECRET123"   # Change this in production
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("index.html")
 
 @app.route("/about")
 def about():
