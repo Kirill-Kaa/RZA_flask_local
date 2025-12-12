@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>{{ title if title else "Zoo Booking System" }}</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
 </head>
+
 
 <body>
 
@@ -41,6 +43,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/my-bookings">My Bookings</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/map">Map</a>
+          </li>
             {% if session.get('user_id') %}
                 <li class="nav-item">
                   <a class="nav-link" href="/logout">Logout ({{ session['username'] }})</a>
@@ -80,7 +85,17 @@
           });
       });
       </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const dateInput = document.getElementById("date");
       
+          // Get today's date in yyyy-mm-dd format
+          const today = new Date().toISOString().split("T")[0];
+      
+          // Disable past dates
+          dateInput.setAttribute("min", today);
+      });
+      </script>
 </body>
 
 </html>

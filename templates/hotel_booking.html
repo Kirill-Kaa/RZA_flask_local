@@ -20,19 +20,19 @@
             <form method="POST">
                 <div class="form-group disabled">
                     <span class="form-label">Your Expectation</span>
-                    <input class="form-control" type="text" placeholder="Enter a destination or hotel name" disabled>
+                    <input class="form-control" type="text" placeholder="Enter a destination or hotel name" >
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <span class="form-label">Check In</span>
-                            <input name="check_in" class="form-control" type="date" required>
+                            <input name="check_in" id="date" class="form-control" type="date" required>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
                             <span class="form-label">Check out</span>
-                            <input name="check_out" class="form-control" type="date" required>
+                            <input name="check_out" id="date" class="form-control" type="date" required>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,4 @@
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}

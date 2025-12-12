@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mt-4 mb-3 p-5 bg-success text-white text-center rounded">
+    <h1>Interactive Map</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi est adipisci eveniet neque quae corporis voluptatum. Mollitia cum officiis numquam.!</p> 
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="fw-bold">Zoo Interactive Map</h1>
+        <p class="text-muted">
+            Explore our zoo and learn more about different areas and enclosures.
+        </p>
+    </div>
+
+    <!-- Map Container -->
+    <div id="zoo-map" style="
+        height: 550px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+    "></div>
+</div>
+
+
+<script>
+    // Coordinates of Bristol Zoo (former location)
+    const zooCoords = [51.4634, -2.6224];
+    
+    // Initialize map
+    const map = L.map('zoo-map').setView(zooCoords, 16);
+    
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+    
+    // --- Example Marker ---
+    L.marker(zooCoords)
+        .addTo(map)
+        .bindPopup("<strong>RZA Zoo</strong><br>Main Entrance")
+        .openPopup();
+    
+    // --- Example Animal Zones (Polygons) ---
+    
+    // Lion Area Example
+    const lionArea = L.polygon([
+        [51.4638, -2.6220],
+        [51.4636, -2.6215],
+        [51.4633, -2.6221]
+    ], {
+        color: "orange",
+        fillOpacity: 0.3
+    }).addTo(map);
+    lionArea.bindPopup("<strong>Lion Enclosure</strong>");
+    
+    // Reptile House Example
+    const reptileHouse = L.polygon([
+        [51.4632, -2.6230],
+        [51.4630, -2.6228],
+        [51.4628, -2.6232]
+    ], {
+        color: "green",
+        fillOpacity: 0.3
+    }).addTo(map);
+    reptileHouse.bindPopup("<strong>Reptile House</strong>");
+
+    // Reptile House Example
+    const gorilaIsland = L.polygon([
+        [51.463470, -2.621563],
+        [51.463532, -2.620990],
+        [51.463215, -2.620718]
+    ], {
+        color: "brown",
+        fillOpacity: 0.3
+    }).addTo(map);
+    gorilaIsland.bindPopup("<strong>Gorilla Island</strong>");
+    
+    // Café Example (Marker)
+    L.marker([51.4631, -2.6223]).addTo(map)
+        .bindPopup("<strong>Cafe & Restoran</strong>");
+    
+    // Exit Example
+    L.marker([51.4639, -2.6230]).addTo(map)
+        .bindPopup("<strong>Exit</strong>");
+    
+</script>
+    
+{% endblock %}

@@ -12,6 +12,10 @@ def home():
 def about():
     return render_template("about.html")
 
+@app.route("/map")
+def mappage():
+    return render_template("map.html")
+
 @app.route("/education")
 def education():
     return render_template("education.html")
