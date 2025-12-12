@@ -40,11 +40,16 @@
     }).addTo(map);
     
     // --- Example Marker ---
-    L.marker(zooCoords)
-        .addTo(map)
-        .bindPopup("<strong>RZA Zoo</strong><br>Main Entrance")
-        .openPopup();
-    
+    const customIcon = L.icon({
+        iconUrl: "{{ url_for('static', filename='icons/zooicon.png') }}",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -35]
+    });
+
+    L.marker(zooCoords, { icon: customIcon })
+     .addTo(map)
+     .bindPopup("<strong>Bristol Zoo</strong><br>Main Entrance");
     // --- Example Animal Zones (Polygons) ---
     
     // Lion Area Example
@@ -56,7 +61,7 @@
         color: "orange",
         fillOpacity: 0.3
     }).addTo(map);
-    lionArea.bindPopup("<strong>Lion Enclosure</strong>");
+    lionArea.bindPopup("<strong>🦁Lion Enclosure</strong>");
     
     // Reptile House Example
     const reptileHouse = L.polygon([
@@ -67,9 +72,9 @@
         color: "green",
         fillOpacity: 0.3
     }).addTo(map);
-    reptileHouse.bindPopup("<strong>Reptile House</strong>");
+    reptileHouse.bindPopup("<strong>🦎Reptile House</strong>");
 
-    // Reptile House Example
+    // Gorila House Example
     const gorilaIsland = L.polygon([
         [51.463470, -2.621563],
         [51.463532, -2.620990],
@@ -78,15 +83,27 @@
         color: "brown",
         fillOpacity: 0.3
     }).addTo(map);
-    gorilaIsland.bindPopup("<strong>Gorilla Island</strong>");
+    gorilaIsland.bindPopup("<strong>🦍Gorilla Island</strong>");
     
+    // Panda House Example
+    const panaArea = L.polygon([
+        [51.462843, -2.622115],
+        [51.463034, -2.621279],
+        [51.462678, -2.621152],
+        [51.462565, -2.621866]
+    ], {
+        color: "blue",
+        fillOpacity: 0.3
+    }).addTo(map);
+    panaArea.bindPopup("<strong>🐼Pandas</strong>");
+
     // Café Example (Marker)
-    L.marker([51.4631, -2.6223]).addTo(map)
-        .bindPopup("<strong>Cafe & Restoran</strong>");
+    L.marker([51.463282, -2.623597]).addTo(map)
+        .bindPopup("<strong>`☕Cafe & Restoran</strong>");
     
     // Exit Example
     L.marker([51.4639, -2.6230]).addTo(map)
-        .bindPopup("<strong>Exit</strong>");
+        .bindPopup("<strong>💀Exit</strong>");
     
 </script>
     
