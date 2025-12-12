@@ -22,43 +22,49 @@
           <a class="nav-item" href="/">
             <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="50" class="logo-image rounded-circle">
           </a>
-          <ul class="navbar-nav d-flex nav-underline">
-            <li>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/education">Education</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/map">Map</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/booking">Booking</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/hotel">Hotel Booking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/my-bookings">My Bookings</a>
-            </li>
-            {% if session.get('user_id') %}
-                <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout ({{ session['username'] }})</a>
-                </li>
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
-            {% endif %}
-          </ul>
+          <!-- Toggler (Burger menu) -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto nav-underline mr-2">
+              <li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/education">Education</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/map">Map</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/booking">Booking</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/hotel">Hotel Booking</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/my-bookings">My Bookings</a>
+              </li>
+              {% if session.get('user_id') %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout ({{ session['username'] }})</a>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="/login">Login</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/register">Register</a>
+                  </li>
+              {% endif %}
+            </ul>
+          </div>
         </div>
     </nav>
 
