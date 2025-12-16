@@ -4,6 +4,37 @@
     transition: transform .2s; /* Animation */
 }
 
+
+.feedback-btn {
+      background: linear-gradient(135deg, #6f42c1, #20c997);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .feedback-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px rgba(32, 201, 151, 0.4); }
+      50% { box-shadow: 0 0 25px rgba(111, 66, 193, 0.6); }
+      100% { box-shadow: 0 0 15px rgba(32, 201, 151, 0.4); }
+    }
+
+    .feedback-text {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #6c757d;
+      text-align: center;
+    }
 /* input[type="date"],
 input[type="number"] {
     width: 100%;
